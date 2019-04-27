@@ -1,4 +1,4 @@
-const api = 'https://localhost:3001';
+const api = 'http://localhost:3001';
 // Generate a unique token for storing your data on the backend server.
 let token = localStorage.token;
 
@@ -21,9 +21,9 @@ export const getAllCategories = () =>
 export const getAllPosts = () =>
   fetch(`${api}/posts`, { headers })
     .then((response) => response.json())
-    .then(data);
+    .then((data) => data);
 
 export const getAllComments = (id) =>
   fetch(`${api}/posts/${id}/comments`, { headers })
     .then((response) => response.json())
-    .then(data);
+    .then((data) => data);
