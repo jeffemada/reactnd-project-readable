@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { handleInitialData } from '../actions/shared';
+import DashBord from './DashBord';
 
 class App extends Component {
   componentDidMount() {
@@ -48,34 +49,7 @@ class App extends Component {
             </div>
           </nav>
         </header>
-        <main style={{ marginTop: '80px' }}>
-          <div className="row">
-            <article className="col-md-12 post">
-              <h3>Post teste 1</h3>
-              <p>Posted by Pedro 19 hours ago</p>
-              <p className="post-indicators">
-                <span className="fontawesome-arrow-up" />
-                <span>3</span>
-                <span className="fontawesome-arrow-down separator" />
-                <span className="fontawesome-comment" />
-                <span>25 Comments</span>
-              </p>
-            </article>
-          </div>
-          <div className="row">
-            <article className="col-md-12 post">
-              <h3>Post teste 2</h3>
-              <p>Posted by Ana 3 hours ago</p>
-              <p className="post-indicators">
-                <span className="fontawesome-arrow-up" />
-                <span>0</span>
-                <span className="fontawesome-arrow-down separator" />
-                <span className="fontawesome-comment" />
-                <span>0 Comments</span>
-              </p>
-            </article>
-          </div>
-        </main>
+        <DashBord/>
         <footer className="text-center footer-text">
           <div className="row">
             <div className="col-md-12 social">

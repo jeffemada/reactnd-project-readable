@@ -28,6 +28,10 @@ a:hover {
   text-decoration: none;
 }
 
+.dashbord {
+  margin-top: 80px;
+}
+
 .post {
   background-color: #e6ebf0;
   margin: 1px;
@@ -43,7 +47,8 @@ a:hover {
   margin-right: 15px !important;
 }
 
-.post-indicators span {
+.post-indicators span,
+.post-indicators svg {
   margin-right: 2px;
 }
 
