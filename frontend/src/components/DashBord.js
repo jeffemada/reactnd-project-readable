@@ -1,57 +1,69 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Post from './Post';
+import DashbordList from './DashbordList';
 
 class DashBord extends Component {
+  state = { postIds: [] };
+
+  componentWillReceiveProps(newprops) {
+    const { posts } = newprops;
+    this.sort(posts, 'votes');
+  }
+
+  sort = (posts, sortMode) => {
+    const postIds = Object.keys(posts).sort((a, b) =>
+      sortMode === 'votes' ? posts[b].voteScore - posts[a].voteScore : posts[b].timestamp - posts[a].timestamp
+    );
+    this.setState(() => ({
+      postIds
+    }));
+  };
+
+  handleSortModeChange = (e) => {
+    const sortMode = e.target.value;
+    const { posts } = this.props;
+    this.sort(posts, sortMode);
+  };
+
   render() {
+    const { postIds } = this.state;
+
     return (
       <main className="dashbord">
-        <ul>
-          {this.props.postIds.map((id) => (
-            <li key={id}>
-              <Post id={id} />
-            </li>
-          ))}
-        </ul>
+        <section className="dashbord-filter">
+          <form>
+            <ul>
+              <li>
+                <label htmlFor="selCategory" className="text-margin-right">
+                  Categories:
+                </label>
+                <select name="selCategory">
+                  <option value="react">react</option>
+                  <option value="redux">redux</option>
+                  <option value="udacity">udacity</option>
+                </select>
+              </li>
+              <li>
+                <label htmlFor="selSort" className="text-margin-right">
+                  Sort:
+                </label>
+                <select name="selSort" onChange={this.handleSortModeChange}>
+                  <option value="votes">votes</option>
+                  <option value="date">date</option>
+                </select>
+              </li>
+            </ul>
+          </form>
+        </section>
+        <DashbordList postIds={postIds} />
       </main>
     );
   }
 }
 
-/*
-<main style={{ marginTop: '80px' }}>
-          <div className="row">
-            <article className="col-md-12 post">
-              <h3>Post teste 1</h3>
-              <p>Posted by Pedro 19 hours ago</p>
-              <p className="post-indicators">
-                <span className="fontawesome-arrow-up" />
-                <span>3</span>
-                <span className="fontawesome-arrow-down separator" />
-                <span className="fontawesome-comment" />
-                <span>25 Comments</span>
-              </p>
-            </article>
-          </div>
-          <div className="row">
-            <article className="col-md-12 post">
-              <h3>Post teste 2</h3>
-              <p>Posted by Ana 3 hours ago</p>
-              <p className="post-indicators">
-                <span className="fontawesome-arrow-up" />
-                <span>0</span>
-                <span className="fontawesome-arrow-down separator" />
-                <span className="fontawesome-comment" />
-                <span>0 Comments</span>
-              </p>
-            </article>
-          </div>
-        </main>
-*/
-
 function mapStateToProps({ posts }) {
   return {
-    postIds: Object.keys(posts).sort((a, b) => posts[b].voteScore - posts[a].voteScore)
+    posts
   };
 }
 

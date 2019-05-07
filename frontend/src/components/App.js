@@ -10,9 +10,9 @@ class App extends Component {
 
   render() {
     return (
-      <div className="container-fluid">
+      <div className="container">
         <header className="fixed-top header-text">
-          <nav className="navbar navbar-expand-sm bg-light navbar-light">
+          <nav className="navbar navbar-expand-md bg-light navbar-light">
             <a className="navbar-brand" href="/" alt="Go to home page" title="Home page">
               <img className="title-logo" src="../../images/logo.svg" alt="J Readable logo" />
             </a>
@@ -25,26 +25,7 @@ class App extends Component {
               <ul className="navbar-nav">
                 <li className="nav-item">
                   <a href="/">Create post</a>
-                </li>
-                <li className="nav-item">
-                  <label htmlFor="selCategory" className="text-margin-right">
-                    Categories
-                  </label>
-                  <select id="selSselCategoryort">
-                    <option value="react">react</option>
-                    <option value="redux">redux</option>
-                    <option value="udacity">udacity</option>
-                  </select>
-                </li>
-                <li className="nav-item">
-                  <label htmlFor="selSort" className="text-margin-right">
-                    Sort
-                  </label>
-                  <select id="selSort">
-                    <option value="1">votes</option>
-                    <option value="2">date</option>
-                  </select>
-                </li>
+                </li>                
               </ul>
             </div>
           </nav>
