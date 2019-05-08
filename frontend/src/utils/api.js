@@ -23,6 +23,11 @@ export const getAllPosts = () =>
     .then((response) => response.json())
     .then((data) => data);
 
+export const getPostsByCategory = (category) =>
+  fetch(`${api}/${category}/posts`, { headers })
+    .then((response) => response.json())
+    .then((data) => data);
+
 export const getAllComments = (id) =>
   fetch(`${api}/posts/${id}/comments`, { headers })
     .then((response) => response.json())

@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
+import { FaGithub, FaTwitter } from 'react-icons/fa';
 import { connect } from 'react-redux';
 import { handleInitialData } from '../actions/shared';
 import DashBord from './DashBord';
 
 class App extends Component {
   componentDidMount() {
-    this.props.dispatch(handleInitialData());
+    const { dispatch } = this.props;
+    dispatch(handleInitialData());
   }
 
   render() {
@@ -25,27 +27,21 @@ class App extends Component {
               <ul className="navbar-nav">
                 <li className="nav-item">
                   <a href="/">Create post</a>
-                </li>                
+                </li>
               </ul>
             </div>
           </nav>
         </header>
-        <DashBord/>
+        <DashBord />
         <footer className="text-center footer-text">
           <div className="row">
             <div className="col-md-12 social">
-              <a
-                href="https://twitter.com/jeffemada"
-                className="fontawesome-twitter"
-                alt="Developer Twitter page"
-                title="Twitter"
-              />
-              <a
-                href="https://github.com/jeffemada"
-                className="fontawesome-github"
-                alt="Developer GitHub page"
-                title="GitHub"
-              />
+              <a href="https://twitter.com/jeffemada" alt="Developer Twitter page" title="Twitter">
+                <FaTwitter />
+              </a>
+              <a href="https://github.com/jeffemada" alt="Developer GitHub page" title="GitHub">
+                <FaGithub />
+              </a>
             </div>
           </div>
           <div className="row">

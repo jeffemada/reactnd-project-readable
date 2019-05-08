@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import DashbordList from './DashbordList';
+import { handleReceivePosts, handleReceivePostsByCategory } from '../actions/posts';
 
 class DashBord extends Component {
   state = { postIds: [] };
@@ -19,6 +20,17 @@ class DashBord extends Component {
     }));
   };
 
+  handleFilterByCategory = (e) => {
+    const category = e.target.value;
+    const { dispatch } = this.props;
+
+    if (category) {
+      dispatch(handleReceivePostsByCategory(category));
+    } else {
+      dispatch(handleReceivePosts());
+    }
+  };
+
   handleSortModeChange = (e) => {
     const sortMode = e.target.value;
     const { posts } = this.props;
@@ -35,9 +47,10 @@ class DashBord extends Component {
             <ul>
               <li>
                 <label htmlFor="selCategory" className="text-margin-right">
-                  Categories:
+                  Category:
                 </label>
-                <select name="selCategory">
+                <select name="selCategory" onChange={this.handleFilterByCategory}>
+                  <option value=""></option>
                   <option value="react">react</option>
                   <option value="redux">redux</option>
                   <option value="udacity">udacity</option>
