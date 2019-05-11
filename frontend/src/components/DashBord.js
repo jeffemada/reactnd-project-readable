@@ -33,7 +33,13 @@ class DashBord extends Component {
       dispatch(handleReceivePosts());
     }
 
+    // ordenação padrão
+    this.setState(() => ({
+      sortMode: 'votes'
+    }));
+
     this.sort(posts, sortMode);
+    this.props.history.push(`/${category}`);
   };
 
   handleSortModeChange = (e) => {
@@ -43,7 +49,7 @@ class DashBord extends Component {
   };
 
   render() {
-    const { postIds } = this.state;
+    const { postIds, sortMode } = this.state;
 
     return (
       <main className="dashbord">
@@ -65,7 +71,7 @@ class DashBord extends Component {
                 <label htmlFor="selSort" className="text-margin-right">
                   Sort:
                 </label>
-                <select name="selSort" onChange={this.handleSortModeChange}>
+                <select name="selSort" value={sortMode} onChange={this.handleSortModeChange}>
                   <option value="votes">votes</option>
                   <option value="date">date</option>
                 </select>
