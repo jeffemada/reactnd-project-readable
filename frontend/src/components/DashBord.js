@@ -4,11 +4,12 @@ import DashbordList from './DashbordList';
 import { handleReceivePosts, handleReceivePostsByCategory } from '../actions/posts';
 
 class DashBord extends Component {
-  state = { postIds: [] };
+  state = { postIds: [], sortMode: 'votes' };
 
   componentWillReceiveProps(newprops) {
     const { posts } = newprops;
-    this.sort(posts, 'votes');
+    const { sortMode } = this.state;
+    this.sort(posts, sortMode);
   }
 
   sort = (posts, sortMode) => {
@@ -16,19 +17,23 @@ class DashBord extends Component {
       sortMode === 'votes' ? posts[b].voteScore - posts[a].voteScore : posts[b].timestamp - posts[a].timestamp
     );
     this.setState(() => ({
-      postIds
+      postIds,
+      sortMode
     }));
   };
 
   handleFilterByCategory = (e) => {
     const category = e.target.value;
-    const { dispatch } = this.props;
+    const { dispatch, posts } = this.props;
+    const { sortMode } = this.state;
 
     if (category) {
       dispatch(handleReceivePostsByCategory(category));
     } else {
       dispatch(handleReceivePosts());
     }
+
+    this.sort(posts, sortMode);
   };
 
   handleSortModeChange = (e) => {
@@ -50,7 +55,7 @@ class DashBord extends Component {
                   Category:
                 </label>
                 <select name="selCategory" onChange={this.handleFilterByCategory}>
-                  <option value=""></option>
+                  <option value="" />
                   <option value="react">react</option>
                   <option value="redux">redux</option>
                   <option value="udacity">udacity</option>
