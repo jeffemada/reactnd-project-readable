@@ -4,7 +4,11 @@ import DashbordList from './DashbordList';
 import { handleReceivePosts, handleReceivePostsByCategory } from '../actions/posts';
 
 class DashBord extends Component {
-  state = { postIds: [], sortMode: 'votes' };
+  state = {
+    category: '',
+    postIds: [],
+    sortMode: 'votes'
+  };
 
   componentWillReceiveProps(newprops) {
     const { posts } = newprops;
@@ -33,13 +37,12 @@ class DashBord extends Component {
       dispatch(handleReceivePosts());
     }
 
-    // ordenação padrão
-    this.setState(() => ({
-      sortMode: 'votes'
-    }));
-
     this.sort(posts, sortMode);
     this.props.history.push(`/${category}`);
+
+    this.setState(() => ({
+      category
+    }));
   };
 
   handleSortModeChange = (e) => {
@@ -49,7 +52,7 @@ class DashBord extends Component {
   };
 
   render() {
-    const { postIds, sortMode } = this.state;
+    const { category, postIds, sortMode } = this.state;
 
     return (
       <main className="dashbord">
@@ -60,7 +63,7 @@ class DashBord extends Component {
                 <label htmlFor="selCategory" className="text-margin-right">
                   Category:
                 </label>
-                <select name="selCategory" onChange={this.handleFilterByCategory}>
+                <select name="selCategory" value={category} onChange={this.handleFilterByCategory}>
                   <option value="" />
                   <option value="react">react</option>
                   <option value="redux">redux</option>
