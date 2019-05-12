@@ -1,14 +1,5 @@
-export function formatDate(timestamp) {
-  const d = new Date(timestamp);
-  const time = d.toLocaleTimeString('en-US');
-  return time.substr(0, 5) + time.slice(-2) + ' | ' + d.toLocaleDateString();
-}
-
-export function formatPost(post) {
-  const { id, timestamp } = post;
-
-  return {
-    id,
-    timestamp
-  };
-}
+export const arrayToObject = (array, keyField) =>
+  array.reduce((obj, item) => {
+    obj[item[keyField]] = item;
+    return obj;
+  }, {});
