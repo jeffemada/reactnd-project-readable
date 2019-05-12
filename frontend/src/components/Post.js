@@ -2,8 +2,21 @@ import React, { Component } from 'react';
 import { FaArrowAltCircleDown, FaArrowAltCircleUp, FaCommentAlt } from 'react-icons/fa';
 import { connect } from 'react-redux';
 import TimeAgo from 'react-timeago';
+import { handleVotePost } from '../actions/posts';
 
 class Post extends Component {
+  handleUpVoteClick = (e) => {
+    e.preventDefault();
+    const { dispatch, post } = this.props;
+    dispatch(handleVotePost(post.id, 'upVote'));
+  };
+
+  handleDownVoteClick = (e) => {
+    e.preventDefault();
+    const { dispatch, post } = this.props;
+    dispatch(handleVotePost(post.id, 'downVote'));
+  };
+
   render() {
     const { title, author, timestamp, voteScore, commentCount, category } = this.props.post;
     return (
@@ -14,9 +27,13 @@ class Post extends Component {
             Posted by {author} <TimeAgo date={timestamp} />.
           </p>
           <p className="post-indicators">
-            <FaArrowAltCircleDown />
+            <button className="image-button" onClick={this.handleUpVoteClick}>
+              <FaArrowAltCircleUp />
+            </button>
             <span>{voteScore}</span>
-            <FaArrowAltCircleUp />
+            <button className="image-button" onClick={this.handleDownVoteClick}>
+              <FaArrowAltCircleDown />
+            </button>
             <span className="separator" />
             <FaCommentAlt />
             <span>{commentCount} Comments</span>

@@ -17,8 +17,7 @@ class App extends Component {
       <BrowserRouter>
         <div className="container">
           <Header />
-          <Route path="/" exact component={DashBord} />
-          <Route path="/:category" component={DashBord} />
+          <Route path="/" component={DashBord} />
           <Footer />
         </div>
       </BrowserRouter>

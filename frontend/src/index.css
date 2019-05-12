@@ -72,6 +72,11 @@ a:hover {
   margin-right: 2px;
 }
 
+.image-button {
+  background: transparent;
+  border: none;
+}
+
 .text-margin-right {
   margin-right: 3px;
 }

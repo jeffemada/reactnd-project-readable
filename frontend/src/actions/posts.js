@@ -1,11 +1,20 @@
-import { getAllPosts, getPostsByCategory } from '../utils/api';
+import { getAllPosts, getPostsByCategory, votePost as votePostApi } from '../utils/api';
 
 export const RECEIVE_POSTS = 'RECEIVE_POSTS';
+export const VOTE_POST = 'VOTE_POST';
 
 export function receivePosts(posts) {
   return {
     type: RECEIVE_POSTS,
     posts
+  };
+}
+
+export function votePost(id, option) {
+  return {
+    type: VOTE_POST,
+    id,
+    option
   };
 }
 
@@ -21,6 +30,18 @@ export function handleReceivePostsByCategory(category) {
   return (dispatch) => {
     return getPostsByCategory(category).then((posts) => {
       dispatch(receivePosts(posts));
+    });
+  };
+}
+
+export function handleVotePost(id, option) {
+  return (dispatch) => {
+    dispatch(votePost(id, option));
+
+    return votePostApi(id, option).catch((e) => {
+      console.warn('Error in handleVotePost: ', e);
+      dispatch(votePost(id, option === 'upVote' ? 'downVote' : 'upVote'));
+      alert('Houve um erro ao votar no post. Tente novamente.');
     });
   };
 }

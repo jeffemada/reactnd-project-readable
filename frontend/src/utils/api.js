@@ -10,14 +10,17 @@ if (!token) {
 
 const headers = {
   Accept: 'application/json',
-  Authorization: token
+  Authorization: token,
+  'Content-type': 'application/json'
 };
 
+/* Category */
 export const getAllCategories = () =>
   fetch(`${api}/categories`, { headers })
     .then((response) => response.json())
     .then((data) => data.categories);
 
+/* Post */
 export const getAllPosts = () =>
   fetch(`${api}/posts`, { headers })
     .then((response) => response.json())
@@ -28,6 +31,12 @@ export const getPostsByCategory = (category) =>
     .then((response) => response.json())
     .then((data) => data);
 
+export const votePost = (id, option) =>
+  fetch(`${api}/posts/${id}`, { headers, method: 'POST', body: `${JSON.stringify({ option })}` })
+    .then((response) => response.json())
+    .then((data) => data);
+
+/* Comments */
 export const getAllComments = (id) =>
   fetch(`${api}/posts/${id}/comments`, { headers })
     .then((response) => response.json())
