@@ -55,7 +55,7 @@ class DashBord extends Component {
     const { category, postIds, sortMode } = this.state;
 
     return (
-      <main className="dashbord">
+      <div>
         <section className="dashbord-filter">
           <form>
             <ul>
@@ -83,7 +83,7 @@ class DashBord extends Component {
           </form>
         </section>
         <DashbordList postIds={postIds} />
-      </main>
+      </div>
     );
   }
 }

@@ -23,11 +23,11 @@ a:hover {
   text-decoration: none;
 }
 
-/* Dashbord */
-.dashbord {
+.main {
   margin-top: 80px;
 }
 
+/* Dashbord */
 .dashbord-filter {
   padding: 5px;
 }

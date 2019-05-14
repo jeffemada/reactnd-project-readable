@@ -5,6 +5,7 @@ import { handleInitialData } from '../actions/shared';
 import DashBord from './DashBord';
 import Footer from './Footer';
 import Header from './Header';
+import PostDetail from './PostDetail';
 
 class App extends Component {
   componentDidMount() {
@@ -17,7 +18,11 @@ class App extends Component {
       <BrowserRouter>
         <div className="container">
           <Header />
-          <Route path="/" component={DashBord} />
+          <main className="main">
+            <Route path="/" exact component={DashBord} />
+            <Route path="/:category" exact component={DashBord} />
+            <Route path="/:category/:id" exact component={PostDetail} />
+          </main>
           <Footer />
         </div>
       </BrowserRouter>

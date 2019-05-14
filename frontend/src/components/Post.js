@@ -3,6 +3,7 @@ import { FaArrowAltCircleDown, FaArrowAltCircleUp, FaCommentAlt } from 'react-ic
 import { connect } from 'react-redux';
 import TimeAgo from 'react-timeago';
 import { handleVotePost } from '../actions/posts';
+import { Link, withRouter } from 'react-router-dom';
 
 class Post extends Component {
   handleUpVoteClick = (e) => {
@@ -18,9 +19,9 @@ class Post extends Component {
   };
 
   render() {
-    const { title, author, timestamp, voteScore, commentCount, category } = this.props.post;
+    const { id, title, author, timestamp, voteScore, commentCount, category } = this.props.post;
     return (
-      <div className="row">
+      <Link to={`/${category}/${id}`} className="row">
         <article className="col-md-12 post">
           <h3>{title}</h3>
           <p>
@@ -41,7 +42,7 @@ class Post extends Component {
             <span>{category}</span>
           </p>
         </article>
-      </div>
+      </Link>
     );
   }
 }
@@ -54,4 +55,4 @@ function mapStateToProps({ posts }, { id }) {
   };
 }
 
-export default connect(mapStateToProps)(Post);
+export default withRouter(connect(mapStateToProps)(Post));
