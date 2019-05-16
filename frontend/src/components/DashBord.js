@@ -6,24 +6,13 @@ import { handleReceivePosts, handleReceivePostsByCategory } from '../actions/pos
 class DashBord extends Component {
   state = {
     category: '',
-    postIds: [],
     sortMode: 'votes'
   };
 
-  componentWillReceiveProps(newprops) {
-    const { posts } = newprops;
-    const { sortMode } = this.state;
-    this.sort(posts, sortMode);
-  }
-
   sort = (posts, sortMode) => {
-    const postIds = Object.keys(posts).sort((a, b) =>
+    return Object.keys(posts).sort((a, b) =>
       sortMode === 'votes' ? posts[b].voteScore - posts[a].voteScore : posts[b].timestamp - posts[a].timestamp
     );
-    this.setState(() => ({
-      postIds,
-      sortMode
-    }));
   };
 
   handleFilterByCategory = (e) => {
@@ -47,12 +36,16 @@ class DashBord extends Component {
 
   handleSortModeChange = (e) => {
     const sortMode = e.target.value;
-    const { posts } = this.props;
-    this.sort(posts, sortMode);
+
+    this.setState(() => ({
+      sortMode
+    }));
   };
 
   render() {
-    const { category, postIds, sortMode } = this.state;
+    const { category, sortMode } = this.state;
+    const { posts } = this.props;
+    const sortedPostIds = this.sort(posts, sortMode);
 
     return (
       <div>
@@ -82,7 +75,7 @@ class DashBord extends Component {
             </ul>
           </form>
         </section>
-        <DashbordList postIds={postIds} />
+        <DashbordList postIds={sortedPostIds} />
       </div>
     );
   }

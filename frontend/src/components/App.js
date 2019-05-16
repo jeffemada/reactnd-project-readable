@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { handleInitialData } from '../actions/shared';
-import DashBord from './DashBord';
+import Dashbord from './Dashbord';
 import Footer from './Footer';
 import Header from './Header';
 import PostDetail from './PostDetail';
+import NewPost from './NewPost';
 
 class App extends Component {
   componentDidMount() {
@@ -19,9 +20,12 @@ class App extends Component {
         <div className="container">
           <Header />
           <main className="main">
-            <Route path="/" exact component={DashBord} />
-            <Route path="/:category" exact component={DashBord} />
-            <Route path="/:category/:id" exact component={PostDetail} />
+            <Switch>
+              <Route path="/" exact component={Dashbord} />
+              <Route path="/new" exact component={NewPost} />
+              <Route path="/:category" exact component={Dashbord} />
+              <Route path="/:category/:id" exact component={PostDetail} />
+            </Switch>
           </main>
           <Footer />
         </div>
