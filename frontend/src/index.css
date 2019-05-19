@@ -26,16 +26,14 @@ p {
   padding: 6px !important;
 }
 
-.post-title {
-  padding: 3px !important;
+/* Comment */
+.comment {
+  margin: 5px 0 0 20px;
+  background-color: #e3f2fd !important;
 }
 
-.post-content {
-  padding: 3px !important;
-}
-
-.post-actions {
-  padding: 3px !important;
+.comment button {
+  padding: 6px !important;
 }
 
 /* Header */
@@ -61,4 +59,8 @@ p {
 /* Material UI */
 .grow {
   flex-grow: 1;
+}
+
+.card {
+  padding: 3px !important;
 }

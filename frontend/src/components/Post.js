@@ -22,25 +22,26 @@ class Post extends Component {
   render() {
     const { id, title, body, author, timestamp, voteScore, commentCount, category } = this.props.post;
     const { isDetail } = this.props;
+
     return (
       <Card className="post">
         <Link to={`/${category}/${id}`} className="row">
           <CardHeader
+            className="card"
             title={title}
             subheader={
               <span>
                 Posted by {author} <TimeAgo date={timestamp} /> - {category}
               </span>
             }
-            className="post-title"
           />
         </Link>
         {isDetail && (
-          <CardContent className="post-content">
+          <CardContent className="card">
             <Typography paragraph>{body}</Typography>
           </CardContent>
         )}
-        <CardActions disableActionSpacing className="post-actions">
+        <CardActions disableActionSpacing className="card">
           <Grid container style={{ fontSize: '14px' }}>
             <Grid item xs={6}>
               <IconButton aria-label="Up vote" onClick={this.handleUpVoteClick}>
