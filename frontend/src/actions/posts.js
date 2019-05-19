@@ -1,4 +1,4 @@
-import { getAllPosts, getPostsByCategory, votePost as votePostApi } from '../utils/api';
+import { getAllPosts, getPostsByCategory, votePost as votePostAPI } from '../utils/api';
 
 export const RECEIVE_POSTS = 'RECEIVE_POSTS';
 export const VOTE_POST = 'VOTE_POST';
@@ -38,7 +38,7 @@ export function handleVotePost(id, option) {
   return (dispatch) => {
     dispatch(votePost(id, option));
 
-    return votePostApi(id, option).catch((e) => {
+    return votePostAPI(id, option).catch((e) => {
       console.warn('Error in handleVotePost: ', e);
       dispatch(votePost(id, option === 'upVote' ? 'downVote' : 'upVote'));
       alert('Houve um erro ao votar no post. Tente novamente.');

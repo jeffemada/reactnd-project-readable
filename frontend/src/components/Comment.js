@@ -3,10 +3,24 @@ import { ArrowDropDown, ArrowDropUp, Delete, Edit } from '@material-ui/icons';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import TimeAgo from 'react-timeago';
+import { handleVoteComment } from '../actions/comments';
 
 class Comment extends Component {
+  handleUpVoteClick = (e) => {
+    e.preventDefault();
+    const { dispatch, comment } = this.props;
+    dispatch(handleVoteComment(comment.id, 'upVote'));
+  };
+
+  handleDownVoteClick = (e) => {
+    e.preventDefault();
+    const { dispatch, comment } = this.props;
+    dispatch(handleVoteComment(comment.id, 'downVote'));
+  };
+
   render() {
     const { author, body, voteScore, timestamp } = this.props.comment;
+    
     return (
       <Card className="comment">
         <CardHeader
@@ -23,11 +37,11 @@ class Comment extends Component {
         <CardActions disableActionSpacing className="card">
           <Grid container style={{ fontSize: '14px' }}>
             <Grid item xs={6}>
-              <IconButton aria-label="Up vote">
+              <IconButton aria-label="Up vote" onClick={this.handleUpVoteClick}>
                 <ArrowDropUp />
               </IconButton>
               <span>{voteScore}</span>
-              <IconButton aria-label="Down vote">
+              <IconButton aria-label="Down vote" onClick={this.handleDownVoteClick}>
                 <ArrowDropDown />
               </IconButton>
             </Grid>
