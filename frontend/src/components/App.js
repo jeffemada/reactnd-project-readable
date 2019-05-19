@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import LoadingBar from 'react-redux-loading';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { handleInitialData } from '../actions/shared';
 import Dashbord from './Dashbord';
@@ -17,6 +18,7 @@ class App extends Component {
   render() {
     return (
       <BrowserRouter>
+        <LoadingBar />
         <Header />
         <main>
           <Switch>
