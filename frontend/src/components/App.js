@@ -5,8 +5,8 @@ import { handleInitialData } from '../actions/shared';
 import Dashbord from './Dashbord';
 import Footer from './Footer';
 import Header from './Header';
-import PostDetail from './PostDetail';
 import NewPost from './NewPost';
+import PostDetail from './PostDetail';
 
 class App extends Component {
   componentDidMount() {
@@ -17,18 +17,16 @@ class App extends Component {
   render() {
     return (
       <BrowserRouter>
-        <div className="container">
-          <Header />
-          <main className="main">
-            <Switch>
-              <Route path="/" exact component={Dashbord} />
-              <Route path="/new" exact component={NewPost} />
-              <Route path="/:category" exact component={Dashbord} />
-              <Route path="/:category/:id" exact component={PostDetail} />
-            </Switch>
-          </main>
-          <Footer />
-        </div>
+        <Header />
+        <main>
+          <Switch>
+            <Route path="/" exact component={Dashbord} />
+            <Route path="/new" exact component={NewPost} />
+            <Route path="/:category" exact component={Dashbord} />
+            <Route path="/:category/:id" exact component={PostDetail} />
+          </Switch>
+        </main>
+        <Footer />
       </BrowserRouter>
     );
   }

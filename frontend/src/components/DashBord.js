@@ -1,7 +1,8 @@
+import { FormControl, Grid, InputLabel, Select } from '@material-ui/core';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import DashbordList from './DashbordList';
 import { handleReceivePosts, handleReceivePostsByCategory } from '../actions/posts';
+import PostList from './PostList';
 
 class DashBord extends Component {
   state = {
@@ -48,35 +49,33 @@ class DashBord extends Component {
     const sortedPostIds = this.sort(posts, sortMode);
 
     return (
-      <div>
-        <section className="dashbord-filter">
-          <form>
-            <ul>
-              <li>
-                <label htmlFor="selCategory" className="text-margin-right">
-                  Category:
-                </label>
-                <select name="selCategory" value={category} onChange={this.handleFilterByCategory}>
+      <Grid container>
+        <Grid item xs={12}>
+          <Grid container justify="flex-start" spacing={24}>
+            <Grid item>
+              <FormControl>
+                <InputLabel htmlFor="selCategory">Category</InputLabel>
+                <Select native name="selCategory" value={category} onChange={this.handleFilterByCategory}>
                   <option value="" />
                   <option value="react">react</option>
                   <option value="redux">redux</option>
                   <option value="udacity">udacity</option>
-                </select>
-              </li>
-              <li>
-                <label htmlFor="selSort" className="text-margin-right">
-                  Sort:
-                </label>
-                <select name="selSort" value={sortMode} onChange={this.handleSortModeChange}>
+                </Select>
+              </FormControl>
+            </Grid>
+            <Grid item>
+              <FormControl>
+                <InputLabel htmlFor="selSort">Sort</InputLabel>
+                <Select native name="selSort" value={sortMode} onChange={this.handleSortModeChange}>
                   <option value="votes">votes</option>
                   <option value="date">date</option>
-                </select>
-              </li>
-            </ul>
-          </form>
-        </section>
-        <DashbordList postIds={sortedPostIds} />
-      </div>
+                </Select>
+              </FormControl>
+            </Grid>
+          </Grid>
+        </Grid>
+        <PostList postIds={sortedPostIds} />
+      </Grid>
     );
   }
 }

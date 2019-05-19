@@ -1,9 +1,10 @@
+import { Card, CardActions, CardContent, CardHeader, Grid, IconButton, Typography } from '@material-ui/core';
+import { ArrowDropDown, ArrowDropUp, Comment, Delete, Edit } from '@material-ui/icons';
 import React, { Component } from 'react';
-import { FaArrowAltCircleDown, FaArrowAltCircleUp, FaCommentAlt } from 'react-icons/fa';
 import { connect } from 'react-redux';
+import { Link, withRouter } from 'react-router-dom';
 import TimeAgo from 'react-timeago';
 import { handleVotePost } from '../actions/posts';
-import { Link, withRouter } from 'react-router-dom';
 
 class Post extends Component {
   handleUpVoteClick = (e) => {
@@ -19,30 +20,56 @@ class Post extends Component {
   };
 
   render() {
-    const { id, title, author, timestamp, voteScore, commentCount, category } = this.props.post;
+    const { id, title, body, author, timestamp, voteScore, commentCount, category } = this.props.post;
+    const { isDetail } = this.props;
     return (
-      <Link to={`/${category}/${id}`} className="row">
-        <article className="col-md-12 post">
-          <h3>{title}</h3>
-          <p>
-            Posted by {author} <TimeAgo date={timestamp} />.
-          </p>
-          <p className="post-indicators">
-            <button className="image-button" onClick={this.handleUpVoteClick}>
-              <FaArrowAltCircleUp />
-            </button>
-            <span>{voteScore}</span>
-            <button className="image-button" onClick={this.handleDownVoteClick}>
-              <FaArrowAltCircleDown />
-            </button>
-            <span className="separator" />
-            <FaCommentAlt />
-            <span>{commentCount} Comments</span>
-            <span className="separator" />
-            <span>{category}</span>
-          </p>
-        </article>
-      </Link>
+      <Card className="post">
+        <Link to={`/${category}/${id}`} className="row">
+          <CardHeader
+            title={title}
+            subheader={
+              <span>
+                Posted by {author} <TimeAgo date={timestamp} /> - {category}
+              </span>
+            }
+            className="post-title"
+          />
+        </Link>
+        {isDetail && (
+          <CardContent className="post-content">
+            <Typography paragraph>{body}</Typography>
+          </CardContent>
+        )}
+        <CardActions disableActionSpacing className="post-actions">
+          <Grid container style={{ fontSize: '14px' }}>
+            <Grid item xs={6}>
+              <IconButton aria-label="Up vote" onClick={this.handleUpVoteClick}>
+                <ArrowDropUp />
+              </IconButton>
+              <span>{voteScore}</span>
+              <IconButton aria-label="Down vote" onClick={this.handleDownVoteClick}>
+                <ArrowDropDown />
+              </IconButton>
+              <div style={{ verticalAlign: 'middle', display: 'inline-flex', padding: '6px 0' }}>
+                <Comment />
+              </div>
+              <span style={{ paddingLeft: '3px' }}>{commentCount} comments</span>
+            </Grid>
+            {isDetail && (
+              <Grid item xs={6}>
+                <Grid container justify="flex-end">
+                  <IconButton aria-label="Edit">
+                    <Edit />
+                  </IconButton>
+                  <IconButton aria-label="Delete">
+                    <Delete />
+                  </IconButton>
+                </Grid>
+              </Grid>
+            )}
+          </Grid>
+        </CardActions>
+      </Card>
     );
   }
 }

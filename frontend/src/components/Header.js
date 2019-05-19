@@ -1,21 +1,25 @@
+import { AppBar, Button, IconButton, Toolbar, Typography } from '@material-ui/core';
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-export default function Header() {
+function Header() {
   return (
-    <header className="fixed-top header-text">
-      <nav className="navbar navbar-expand-md bg-light navbar-light">
-        <NavLink to="/" exact className="navbar-brand" alt="Go to home page" title="Home page">
-          <img className="title-logo" src="../../images/logo.svg" alt="J Readable logo" />
-        </NavLink>
-        <ul className="navbar-nav">
-          <li className="nav-item">
-            <NavLink to="/new" exact className="navbar-brand" alt="Go to create port page" title="Create post page">
-              Create post
-            </NavLink>
-          </li>
-        </ul>
-      </nav>
+    <header className="grow">
+      <AppBar position="static">
+        <Toolbar>
+          <IconButton color="inherit" component={NavLink} to="/">
+            <img className="title-logo" src="../../images/logo.svg" alt="J Readable logo" />
+          </IconButton>
+          <Typography variant="h6" color="inherit" className="grow">
+            readable
+          </Typography>
+          <Button color="inherit" component={NavLink} to="/new">
+            Create post
+          </Button>
+        </Toolbar>
+      </AppBar>
     </header>
   );
 }
+
+export default Header;
