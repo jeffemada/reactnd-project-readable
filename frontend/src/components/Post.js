@@ -44,11 +44,11 @@ class Post extends Component {
         <CardActions disableActionSpacing className="card">
           <Grid container style={{ fontSize: '14px' }}>
             <Grid item xs={6}>
-              <IconButton aria-label="Up vote" onClick={this.handleUpVoteClick}>
+              <IconButton title="Up vote" type="button" onClick={this.handleUpVoteClick}>
                 <ArrowDropUp />
               </IconButton>
               <span>{voteScore}</span>
-              <IconButton aria-label="Down vote" onClick={this.handleDownVoteClick}>
+              <IconButton title="Down vote" type="button" onClick={this.handleDownVoteClick}>
                 <ArrowDropDown />
               </IconButton>
               <div style={{ verticalAlign: 'middle', display: 'inline-flex', padding: '6px 0' }}>
@@ -59,10 +59,10 @@ class Post extends Component {
             {isDetail && (
               <Grid item xs={6}>
                 <Grid container justify="flex-end">
-                  <IconButton aria-label="Edit">
+                  <IconButton title="Edit" type="button">
                     <Edit />
                   </IconButton>
-                  <IconButton aria-label="Delete">
+                  <IconButton title="Delete" type="button">
                     <Delete />
                   </IconButton>
                 </Grid>

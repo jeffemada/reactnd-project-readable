@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { handleReceiveComments } from '../actions/comments';
 import Comment from './Comment';
 import Post from './Post';
+import NewComment from './NewComment';
 
 class PostDetail extends Component {
   componentDidMount() {
@@ -25,6 +26,9 @@ class PostDetail extends Component {
       <Grid container>
         <Grid item xs={12}>
           <Post id={id} isDetail={true} />
+        </Grid>
+        <Grid item xs={12}>
+          <NewComment postId={id} />
         </Grid>
         <Grid item xs={12}>
           {sortedCommentIds.map((id) => (

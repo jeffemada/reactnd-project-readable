@@ -8,8 +8,15 @@ a:hover {
   text-decoration: none;
 }
 
+fieldset {
+  background-color: #f4f9fd;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin: 0;
+}
+
 main {
-  padding-top: 1em;
+  padding-top: 5px;
 }
 
 p {
@@ -19,7 +26,7 @@ p {
 /* Post */
 .post {
   margin-top: 5px;
-  background-color: #e3f2fd !important;
+  background-color: #f4f9fd !important;
 }
 
 .post button {
@@ -29,7 +36,7 @@ p {
 /* Comment */
 .comment {
   margin: 5px 0 0 20px;
-  background-color: #e3f2fd !important;
+  background-color: #f4f9fd !important;
 }
 
 .comment button {

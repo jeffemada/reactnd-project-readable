@@ -1,7 +1,10 @@
-import { getAllComments, voteComment as voteCommentAPI } from '../utils/api';
+import { hideLoading, showLoading } from 'react-redux-loading';
+import { addComment as addCommentAPI, getAllComments, voteComment as voteCommentAPI } from '../utils/api';
+import { getUUID } from '../utils/helpers';
 
 export const RECEIVE_COMMENTS = 'RECEIVE_COMMENTS';
 export const VOTE_COMMENT = 'VOTE_COMMENT';
+export const ADD_COMMENT = 'ADD_COMMENT';
 
 export function receiveComments(comments) {
   return {
@@ -15,6 +18,13 @@ export function voteComment(id, option) {
     type: VOTE_COMMENT,
     id,
     option
+  };
+}
+
+export function addComment(comment) {
+  return {
+    type: ADD_COMMENT,
+    comment
   };
 }
 
@@ -35,5 +45,15 @@ export function handleVoteComment(id, option) {
       dispatch(voteComment(id, option === 'upVote' ? 'downVote' : 'upVote'));
       alert('Houve um erro ao votar no comentário. Tente novamente.');
     });
+  };
+}
+
+export function handleAddComment(author, body, postId) {
+  return (dispatch) => {
+    dispatch(showLoading());
+
+    return addCommentAPI({ id: getUUID(), timestamp: new Date().getTime(), body, author, parentId: postId })
+      .then((comment) => dispatch(addComment(comment)))
+      .then(() => dispatch(hideLoading()));
   };
 }

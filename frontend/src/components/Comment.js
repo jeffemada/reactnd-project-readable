@@ -6,13 +6,13 @@ import TimeAgo from 'react-timeago';
 import { handleVoteComment } from '../actions/comments';
 
 class Comment extends Component {
-  handleUpVoteClick = (e) => {
+  onClickUpVote = (e) => {
     e.preventDefault();
     const { dispatch, comment } = this.props;
     dispatch(handleVoteComment(comment.id, 'upVote'));
   };
 
-  handleDownVoteClick = (e) => {
+  onClickDownVote = (e) => {
     e.preventDefault();
     const { dispatch, comment } = this.props;
     dispatch(handleVoteComment(comment.id, 'downVote'));
@@ -20,7 +20,7 @@ class Comment extends Component {
 
   render() {
     const { author, body, voteScore, timestamp } = this.props.comment;
-    
+
     return (
       <Card className="comment">
         <CardHeader
@@ -37,20 +37,20 @@ class Comment extends Component {
         <CardActions disableActionSpacing className="card">
           <Grid container style={{ fontSize: '14px' }}>
             <Grid item xs={6}>
-              <IconButton aria-label="Up vote" onClick={this.handleUpVoteClick}>
+              <IconButton title="Up vote" type="button" onClick={this.onClickUpVote}>
                 <ArrowDropUp />
               </IconButton>
               <span>{voteScore}</span>
-              <IconButton aria-label="Down vote" onClick={this.handleDownVoteClick}>
+              <IconButton title="Down vote" type="button" onClick={this.onClickDownVote}>
                 <ArrowDropDown />
               </IconButton>
             </Grid>
             <Grid item xs={6}>
               <Grid container justify="flex-end">
-                <IconButton aria-label="Edit">
+                <IconButton title="Edit" type="button">
                   <Edit />
                 </IconButton>
-                <IconButton aria-label="Delete">
+                <IconButton title="Delete" type="button">
                   <Delete />
                 </IconButton>
               </Grid>
