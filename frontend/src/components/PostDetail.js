@@ -1,5 +1,5 @@
 import { Grid } from '@material-ui/core';
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { handleReceiveComments } from '../actions/comments';
 import Comment from './Comment';
@@ -19,29 +19,40 @@ class PostDetail extends Component {
 
   render() {
     const { id } = this.props.match.params;
-    const { comments } = this.props;
+    const { comments, postExists } = this.props;
     const sortedCommentIds = this.sort(comments);
 
     return (
       <Grid container>
-        <Grid item xs={12}>
-          <Post id={id} isDetail={true} />
-        </Grid>
-        <Grid item xs={12}>
-          <NewComment postId={id} />
-        </Grid>
-        <Grid item xs={12}>
-          {sortedCommentIds.map((id) => (
-            <Comment key={id} id={id} />
-          ))}
-        </Grid>
+        {postExists ? (
+          <Fragment>
+            <Grid item xs={12}>
+              <Post id={id} isDetail={true} />
+            </Grid>
+            <Grid item xs={12}>
+              <NewComment postId={id} />
+            </Grid>
+            <Grid item xs={12}>
+              {sortedCommentIds.map((id) => (
+                <Comment key={id} id={id} />
+              ))}
+            </Grid>
+          </Fragment>
+        ) : (
+          /* TODO olhar bloco mensagem Material UI */
+          <Grid item xs={12}>
+            <p>404 - Post não foi encontrado.</p>
+          </Grid>
+        )}
       </Grid>
     );
   }
 }
 
-function mapStateToProps({ comments }) {
+function mapStateToProps({ posts, comments }, props) {
+  console.log('#####',props.match.params.id, posts[props.match.params])
   return {
+    postExists: posts[props.match.params.id] !== undefined,
     comments
   };
 }
