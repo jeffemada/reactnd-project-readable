@@ -1,10 +1,11 @@
-import { Grid } from '@material-ui/core';
+import { Grid, SnackbarContent } from '@material-ui/core';
+import amber from '@material-ui/core/colors/amber';
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { handleReceiveComments } from '../actions/comments';
 import Comment from './Comment';
-import Post from './Post';
 import NewComment from './NewComment';
+import Post from './Post';
 
 class PostDetail extends Component {
   componentDidMount() {
@@ -39,9 +40,8 @@ class PostDetail extends Component {
             </Grid>
           </Fragment>
         ) : (
-          /* TODO olhar bloco mensagem Material UI */
           <Grid item xs={12}>
-            <p>404 - Post não foi encontrado.</p>
+            <SnackbarContent message="Post não foi encontrado!" style={{ backgroundColor: amber[700] }} />
           </Grid>
         )}
       </Grid>
@@ -50,7 +50,6 @@ class PostDetail extends Component {
 }
 
 function mapStateToProps({ posts, comments }, props) {
-  console.log('#####',props.match.params.id, posts[props.match.params])
   return {
     postExists: posts[props.match.params.id] !== undefined,
     comments

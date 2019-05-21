@@ -3,7 +3,7 @@ import { ArrowDropDown, ArrowDropUp, Delete, Edit } from '@material-ui/icons';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import TimeAgo from 'react-timeago';
-import { handleVoteComment } from '../actions/comments';
+import { handleDeleteComment, handleVoteComment } from '../actions/comments';
 
 class Comment extends Component {
   onClickUpVote = (e) => {
@@ -16,6 +16,12 @@ class Comment extends Component {
     e.preventDefault();
     const { dispatch, comment } = this.props;
     dispatch(handleVoteComment(comment.id, 'downVote'));
+  };
+
+  onClickDelete = (e) => {
+    e.preventDefault();
+    const { dispatch, comment } = this.props;
+    dispatch(handleDeleteComment(comment.id));
   };
 
   render() {
@@ -50,7 +56,7 @@ class Comment extends Component {
                 <IconButton title="Edit" type="button">
                   <Edit />
                 </IconButton>
-                <IconButton title="Delete" type="button">
+                <IconButton title="Delete" type="button" onClick={this.onClickDelete}>
                   <Delete />
                 </IconButton>
               </Grid>
