@@ -2,30 +2,16 @@ import { hideLoading, showLoading } from 'react-redux-loading';
 import {
   addComment as addCommentAPI,
   deleteComment as deleteCommentAPI,
+  editComment as editCommentAPI,
   getAllComments,
   voteComment as voteCommentAPI
 } from '../utils/api';
 import { getUUID } from '../utils/helpers';
-
-export const RECEIVE_COMMENTS = 'RECEIVE_COMMENTS';
-export const VOTE_COMMENT = 'VOTE_COMMENT';
 export const ADD_COMMENT = 'ADD_COMMENT';
 export const DELETE_COMMENT = 'DELETE_COMMENT';
-
-export function receiveComments(comments) {
-  return {
-    type: RECEIVE_COMMENTS,
-    comments
-  };
-}
-
-export function voteComment(id, option) {
-  return {
-    type: VOTE_COMMENT,
-    id,
-    option
-  };
-}
+export const EDIT_COMMENT = 'EDIT_COMMENT';
+export const RECEIVE_COMMENTS = 'RECEIVE_COMMENTS';
+export const VOTE_COMMENT = 'VOTE_COMMENT';
 
 export function addComment(comment) {
   return {
@@ -42,22 +28,25 @@ export function deleteComment(id, postId) {
   };
 }
 
-export function handleReceiveComments(postId) {
-  return (dispatch) => {
-    return getAllComments(postId).then((comments) => {
-      dispatch(receiveComments(comments));
-    });
+export function editComment(comment) {
+  return {
+    type: EDIT_COMMENT,
+    comment
   };
 }
 
-export function handleVoteComment(id, option) {
-  return (dispatch) => {
-    dispatch(voteComment(id, option));
-    return voteCommentAPI(id, option).catch((e) => {
-      console.warn('Error in handleVoteComment: ', e);
-      dispatch(voteComment(id, option === 'upVote' ? 'downVote' : 'upVote'));
-      alert('Houve um erro ao votar no comentário. Tente novamente.');
-    });
+export function receiveComments(comments) {
+  return {
+    type: RECEIVE_COMMENTS,
+    comments
+  };
+}
+
+export function voteComment(id, option) {
+  return {
+    type: VOTE_COMMENT,
+    id,
+    option
   };
 }
 
@@ -77,5 +66,34 @@ export function handleDeleteComment(id) {
     return deleteCommentAPI(id)
       .then((comment) => dispatch(deleteComment(comment.id, comment.parentId)))
       .then(() => dispatch(hideLoading()));
+  };
+}
+
+export function handleEditComment(id, body) {
+  return (dispatch) => {
+    dispatch(showLoading());
+
+    return editCommentAPI(id, { timestamp: new Date().getTime(), body })
+      .then((comment) => dispatch(editComment(comment)))
+      .then(() => dispatch(hideLoading()));
+  };
+}
+
+export function handleReceiveComments(postId) {
+  return (dispatch) => {
+    return getAllComments(postId).then((comments) => {
+      dispatch(receiveComments(comments));
+    });
+  };
+}
+
+export function handleVoteComment(id, option) {
+  return (dispatch) => {
+    dispatch(voteComment(id, option));
+    return voteCommentAPI(id, option).catch((e) => {
+      console.warn('Error in handleVoteComment: ', e);
+      dispatch(voteComment(id, option === 'upVote' ? 'downVote' : 'upVote'));
+      alert('Houve um erro ao votar no comentário. Tente novamente.');
+    });
   };
 }

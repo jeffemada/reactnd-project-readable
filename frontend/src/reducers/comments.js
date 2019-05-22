@@ -1,9 +1,10 @@
-import { ADD_COMMENT, DELETE_COMMENT, RECEIVE_COMMENTS, VOTE_COMMENT } from '../actions/comments';
+import { ADD_COMMENT, DELETE_COMMENT, EDIT_COMMENT, RECEIVE_COMMENTS, VOTE_COMMENT } from '../actions/comments';
 import { arrayToObject } from '../utils/helpers';
 
 export default function comments(state = {}, action) {
   switch (action.type) {
     case ADD_COMMENT:
+    case EDIT_COMMENT:
       return {
         ...state, // copy comments
         [action.comment.id]: action.comment // add new comment
