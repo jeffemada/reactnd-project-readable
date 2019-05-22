@@ -34,10 +34,11 @@ export function addComment(comment) {
   };
 }
 
-export function deleteComment(id) {
+export function deleteComment(id, postId) {
   return {
     type: DELETE_COMMENT,
-    id
+    id,
+    postId
   };
 }
 
@@ -74,7 +75,7 @@ export function handleDeleteComment(id) {
     dispatch(showLoading());
 
     return deleteCommentAPI(id)
-      .then((comment) => dispatch(deleteComment(comment.id)))
+      .then((comment) => dispatch(deleteComment(comment.id, comment.parentId)))
       .then(() => dispatch(hideLoading()));
   };
 }
