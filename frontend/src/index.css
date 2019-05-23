@@ -27,18 +27,10 @@ p {
   background-color: #f1f1f1 !important;
 }
 
-.post button {
-  padding: 6px !important;
-}
-
 /* Comment */
 .comment {
   margin: 5px 0 0 20px;
   background-color: #f1f1f1 !important;
-}
-
-.comment button {
-  padding: 6px !important;
 }
 
 /* Header */
