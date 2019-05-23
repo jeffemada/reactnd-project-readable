@@ -69,7 +69,7 @@ class Comment extends Component {
               <Grid item xs={12}>
                 <TextField
                   id="editCommentBody"
-                  label="Comment"
+                  label="Text"
                   defaultValue={body}
                   margin="dense"
                   rows="2"

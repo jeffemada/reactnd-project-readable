@@ -1,21 +1,22 @@
-import { AppBar, Button, IconButton, Toolbar, Typography } from '@material-ui/core';
+import { AppBar, IconButton, Toolbar, Typography } from '@material-ui/core';
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import { AddCircle } from '@material-ui/icons';
 
 function Header() {
   return (
     <header className="grow">
       <AppBar position="static">
         <Toolbar>
-          <IconButton color="inherit" component={NavLink} to="/">
+          <IconButton title="Home" component={NavLink} to="/" color="inherit">
             <img className="title-logo" src="../../images/logo.svg" alt="J Readable logo" />
           </IconButton>
           <Typography variant="h6" color="inherit" className="grow">
             readable
           </Typography>
-          <Button color="inherit" component={NavLink} to="/new">
-            Create post
-          </Button>
+          <IconButton title="New post" component={NavLink} to="/new" color="inherit">
+            <AddCircle />
+          </IconButton>
         </Toolbar>
       </AppBar>
     </header>

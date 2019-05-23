@@ -7,7 +7,7 @@ export default function comments(state = {}, action) {
     case EDIT_COMMENT:
       return {
         ...state, // copy comments
-        [action.comment.id]: action.comment // add new comment
+        [action.comment.id]: action.comment // add comment
       };
     case DELETE_COMMENT:
       let comments = { ...state }; // copy comments

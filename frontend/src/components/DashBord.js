@@ -45,7 +45,7 @@ class DashBord extends Component {
 
   render() {
     const { category, sortMode } = this.state;
-    const { posts } = this.props;
+    const { categories, posts } = this.props;
     const sortedPostIds = this.sort(posts, sortMode);
 
     return (
@@ -54,21 +54,27 @@ class DashBord extends Component {
           <Grid container justify="flex-start" spacing={24}>
             <Grid item>
               <FormControl>
-                <InputLabel htmlFor="selCategory">Category</InputLabel>
-                <Select native name="selCategory" value={category} onChange={this.handleFilterByCategory}>
-                  <option value="" />
-                  <option value="react">react</option>
-                  <option value="redux">redux</option>
-                  <option value="udacity">udacity</option>
+                <InputLabel htmlFor="selCategory" shrink>
+                  Category
+                </InputLabel>
+                <Select name="selCategory" value={category} onChange={this.handleFilterByCategory} autoWidth native>
+                  <option value="">all</option>
+                  {Object.keys(categories).map((id) => (
+                    <option key={id} value={id}>
+                      {id}
+                    </option>
+                  ))}
                 </Select>
               </FormControl>
             </Grid>
             <Grid item>
               <FormControl>
-                <InputLabel htmlFor="selSort">Sort</InputLabel>
-                <Select native name="selSort" value={sortMode} onChange={this.handleSortModeChange}>
-                  <option value="votes">votes</option>
-                  <option value="date">date</option>
+                <InputLabel htmlFor="selSort" shrink>
+                  Sort
+                </InputLabel>
+                <Select name="selSort" value={sortMode} onChange={this.handleSortModeChange} autoWidth native>
+                  <option value="votes">by votes</option>
+                  <option value="date">by date</option>
                 </Select>
               </FormControl>
             </Grid>
@@ -80,8 +86,9 @@ class DashBord extends Component {
   }
 }
 
-function mapStateToProps({ posts }) {
+function mapStateToProps({ categories, posts }) {
   return {
+    categories,
     posts
   };
 }

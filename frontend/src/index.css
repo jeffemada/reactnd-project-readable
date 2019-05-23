@@ -1,10 +1,5 @@
-a {
-  color: #000;
-  text-decoration: none;
-}
-
+a,
 a:hover {
-  color: #000;
   text-decoration: none;
 }
 

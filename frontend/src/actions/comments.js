@@ -7,6 +7,7 @@ import {
   voteComment as voteCommentAPI
 } from '../utils/api';
 import { getUUID } from '../utils/helpers';
+
 export const ADD_COMMENT = 'ADD_COMMENT';
 export const DELETE_COMMENT = 'DELETE_COMMENT';
 export const EDIT_COMMENT = 'EDIT_COMMENT';

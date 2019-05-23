@@ -26,7 +26,7 @@ class NewComment extends Component {
               <TextField id="newCommentAuthor" label="Author" margin="dense" required fullWidth />
             </Grid>
             <Grid item xs={12}>
-              <TextField id="newCommentBody" label="Comment" margin="dense" rows="2" required fullWidth multiline />
+              <TextField id="newCommentBody" label="Text" margin="dense" rows="2" required fullWidth multiline />
             </Grid>
             <Grid item xs={12}>
               <Grid container justify="flex-end">
