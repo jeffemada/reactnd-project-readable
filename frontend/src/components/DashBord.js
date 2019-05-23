@@ -28,6 +28,8 @@ class DashBord extends Component {
     }
 
     this.sort(posts, sortMode);
+
+    //navega para categoria
     this.props.history.push(`/${category}`);
 
     this.setState(() => ({

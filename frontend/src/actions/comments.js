@@ -94,7 +94,7 @@ export function handleVoteComment(id, option) {
     return voteCommentAPI(id, option).catch((e) => {
       console.warn('Error in handleVoteComment: ', e);
       dispatch(voteComment(id, option === 'upVote' ? 'downVote' : 'upVote'));
-      alert('Houve um erro ao votar no comentário. Tente novamente.');
+      alert('There was an error voting the comment. Try again.');
     });
   };
 }

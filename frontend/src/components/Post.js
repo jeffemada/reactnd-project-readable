@@ -4,19 +4,27 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 import TimeAgo from 'react-timeago';
-import { handleVotePost } from '../actions/posts';
+import { handleDeletePost, handleVotePost } from '../actions/posts';
 
 class Post extends Component {
-  handleUpVoteClick = (e) => {
+  onClickUpVote = (e) => {
     e.preventDefault();
     const { dispatch, post } = this.props;
     dispatch(handleVotePost(post.id, 'upVote'));
   };
 
-  handleDownVoteClick = (e) => {
+  onClickDownVote = (e) => {
     e.preventDefault();
     const { dispatch, post } = this.props;
     dispatch(handleVotePost(post.id, 'downVote'));
+  };
+
+  onClickDelete = (e) => {
+    e.preventDefault();
+    const { dispatch, post } = this.props;
+    dispatch(handleDeletePost(post.id));
+    // volta para home
+    this.props.history.push(`/`);
   };
 
   render() {
@@ -44,11 +52,11 @@ class Post extends Component {
         <CardActions disableActionSpacing className="card">
           <Grid container style={{ fontSize: '14px' }}>
             <Grid item xs={6}>
-              <IconButton title="Up vote" type="button" onClick={this.handleUpVoteClick}>
+              <IconButton title="Up vote" type="button" onClick={this.onClickUpVote}>
                 <ArrowDropUp />
               </IconButton>
               <span>{voteScore}</span>
-              <IconButton title="Down vote" type="button" onClick={this.handleDownVoteClick}>
+              <IconButton title="Down vote" type="button" onClick={this.onClickDownVote}>
                 <ArrowDropDown />
               </IconButton>
               <div style={{ verticalAlign: 'middle', display: 'inline-flex', padding: '6px 0' }}>
@@ -62,7 +70,7 @@ class Post extends Component {
                   <IconButton title="Edit" type="button">
                     <Edit />
                   </IconButton>
-                  <IconButton title="Delete" type="button">
+                  <IconButton title="Delete" type="button" onClick={this.onClickDelete}>
                     <Delete />
                   </IconButton>
                 </Grid>

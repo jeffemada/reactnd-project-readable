@@ -41,7 +41,7 @@ class PostDetail extends Component {
           </Fragment>
         ) : (
           <Grid item xs={12}>
-            <SnackbarContent message="Post não foi encontrado!" style={{ backgroundColor: amber[700] }} />
+            <SnackbarContent message="Post not found!" style={{ backgroundColor: amber[700] }} />
           </Grid>
         )}
       </Grid>

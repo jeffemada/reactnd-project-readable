@@ -41,6 +41,11 @@ export const addPost = (post) =>
     .then((response) => response.json())
     .then((data) => data);
 
+export const deletePost = (id) =>
+  fetch(`${api}/posts/${id}`, { headers, method: 'DELETE' })
+    .then((response) => response.json())
+    .then((data) => data);
+
 /* Comments */
 export const getAllComments = (postId) =>
   fetch(`${api}/posts/${postId}/comments`, { headers })

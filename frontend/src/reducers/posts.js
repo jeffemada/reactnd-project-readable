@@ -1,5 +1,5 @@
 import { ADD_COMMENT, DELETE_COMMENT } from '../actions/comments';
-import { ADD_POST, RECEIVE_POSTS, VOTE_POST } from '../actions/posts';
+import { ADD_POST, DELETE_POST, RECEIVE_POSTS, VOTE_POST } from '../actions/posts';
 import { arrayToObject } from '../utils/helpers';
 
 export default function posts(state = {}, action) {
@@ -26,6 +26,12 @@ export default function posts(state = {}, action) {
           ...state[action.postId], // copy that specific post's properties
           commentCount: state[action.postId].commentCount - 1 // update property
         }
+      };
+    case DELETE_POST:
+      let posts = { ...state }; // copy posts
+      delete posts[action.id]; // delete post
+      return {
+        ...posts
       };
     case RECEIVE_POSTS:
       return {
