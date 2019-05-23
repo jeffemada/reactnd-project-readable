@@ -7,12 +7,10 @@ export function handleInitialData() {
   return (dispatch) => {
     dispatch(showLoading());
 
-    return Promise.all([getAllCategories(), getAllPosts()]).then(
-      ([categories, posts]) => {
-        dispatch(receiveCategories(categories));
-        dispatch(receivePosts(posts));
-        dispatch(hideLoading());
-      }
-    );
+    return Promise.all([getAllCategories(), getAllPosts()]).then(([categories, posts]) => {
+      dispatch(receiveCategories(categories));
+      dispatch(receivePosts(posts));
+      dispatch(hideLoading());
+    });
   };
 }
