@@ -1,5 +1,5 @@
 import { ADD_COMMENT, DELETE_COMMENT } from '../actions/comments';
-import { ADD_POST, DELETE_POST, RECEIVE_POSTS, VOTE_POST } from '../actions/posts';
+import { ADD_POST, DELETE_POST, EDIT_POST, RECEIVE_POSTS, VOTE_POST } from '../actions/posts';
 import { arrayToObject } from '../utils/helpers';
 
 export default function posts(state = {}, action) {
@@ -14,6 +14,7 @@ export default function posts(state = {}, action) {
         }
       };
     case ADD_POST:
+    case EDIT_POST:
       return {
         ...state, // copy posts
         [action.post.id]: action.post // add post

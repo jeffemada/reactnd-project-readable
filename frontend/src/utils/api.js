@@ -46,6 +46,11 @@ export const deletePost = (id) =>
     .then((response) => response.json())
     .then((data) => data);
 
+export const editPost = (id, data) =>
+  fetch(`${api}/posts/${id}`, { headers, method: 'PUT', body: `${JSON.stringify(data)}` })
+    .then((response) => response.json())
+    .then((data) => data);
+
 /* Comments */
 export const getAllComments = (postId) =>
   fetch(`${api}/posts/${postId}/comments`, { headers })
