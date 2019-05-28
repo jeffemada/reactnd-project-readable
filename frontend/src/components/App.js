@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import LoadingBar from 'react-redux-loading';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { handleInitialData } from '../actions/shared';
-import Dashbord from './Dashbord';
+import Dashboard from './Dashboard';
 import Footer from './Footer';
 import Header from './Header';
 import NewPost from './NewPost';
@@ -22,9 +22,9 @@ class App extends Component {
         <Header />
         <main>
           <Switch>
-            <Route path="/" exact component={Dashbord} />
+            <Route path="/" exact component={Dashboard} />
             <Route path="/new" exact component={NewPost} />
-            <Route path="/:category" exact component={Dashbord} />
+            <Route path="/:category" exact component={Dashboard} />
             <Route path="/:category/:id" exact component={PostDetail} />
           </Switch>
         </main>
